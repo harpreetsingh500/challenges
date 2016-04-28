@@ -31,10 +31,9 @@ class Cipher
   end
   
   def decode(text)
-    
+    text.split('').map.with_index do |char, index|
+      value = KEYS[char] - KEYS[key[index]]
+      (value < 0) ? KEYS.to_a[value].first : KEYS.key((value).abs)
+    end.join
   end
 end
-
-test1 = Cipher.new
-p test1.encode('abcdefghij')
-p test1.key[0, 10]
